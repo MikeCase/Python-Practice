@@ -61,7 +61,8 @@ def organize_chars(random_txt):
     lower_case = ''
     punctuations = ''
     digits = '' # Initialize lists for characters.
-    
+    print('\nCatagorization of characters in given string:')
+    print(f'Given string: {random_txt}')
     # Loop through characters in string
     # If character is found in string.caracter_class
     # Add to appropriate list. 
@@ -79,15 +80,47 @@ def organize_chars(random_txt):
             punctuations += c
             punctuations = ''.join(sorted(punctuations))
 
+
     # I should return this but I'm just printing
     print(f"Lower Case:\t{lower_case}\nUpper Case:\t{upper_case}\nDigits:\t\t{digits}\nPunctuation:\t{punctuations}\n")
 
+def count_duplicates_string(s):
+    """
+    Count the duplicate characters in a string. 
+
+    @param: s = String you want to count the duplicates in
+    
+    count_duplicates_string(character_string) -> [char, int]
+    """
+
+    print("Duplicate characters in a given string: ");
+    print(f'Given string: {s}')
+
+    # Found on the interwebs.. 
+    # Going to try to understand and break it down. 
+
+    # Go through the length of the string
+    for i in range(0, len(s)):
+        # Set count to equal 1 instead of starting from 0
+        count = 1;
+        # Go through the entire range of the characters again
+        # increment i + 1, so j=i+1
+        for j in range(i+1, len(s)):
+            # Check to see if the current character is equal to the next character
+            # Also 
+            if(s[i] == s[j] and s[i] != ' '):
+                count = count + 1;
+                s = s[:j] + '0' + s[j+1:];
+        
+        if(count > 1 and s[i] != '0'):
+            print(s[i]," - ",count);
+
+        
 
 def parse_name_and_email(f):
     # Format of parse.txt:
     # <SURNAME>/<FIRSTNAME>/<LOCATION>/<TIMEFRAME>/<EMAILADDRESS>
     # Simple right?..
-
 
     with open(f) as nl:
         names = nl.readlines()
@@ -95,14 +128,16 @@ def parse_name_and_email(f):
     for name in names:
         surname, firstname, _location, _timeframe, email = name.split("/")
         
-    
+pwd = mk_passwd(99)
 
 mk_first_last(name)
 sp_email(email)
-organize_chars(mk_passwd(99))
 
 mk_passwd(1)
 mk_passwd(2)
 mk_passwd(3)
 
 parse_name_and_email('./parse.txt')
+
+count_duplicates_string(pwd)
+organize_chars(pwd)
