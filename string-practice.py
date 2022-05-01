@@ -18,10 +18,6 @@ def mk_first_last(name):
 
     print(f"First Name:\t{first_name}\nMiddle Initial:\t{(middle_initial if middle_initial != None else '')}\nLast Name:\t{last_name}\n")
 
-def split_name_w_middle_initial(name_w_initial):
-    pass
-
-
 
 #split email address into user and host
 def sp_email(email):
