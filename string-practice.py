@@ -88,7 +88,11 @@ def organize_chars(random_txt):
 
 
 def parse_name_and_email(f):
-    # names = []
+    # Format of parse.txt:
+    # <SURNAME>/<FIRSTNAME>/<LOCATION>/<TIMEFRAME>/<EMAILADDRESS>
+    # Simple right?..
+
+    
     with open(f) as nl:
         names = nl.readlines()
 
