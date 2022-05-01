@@ -1,6 +1,7 @@
 # Practicing working with strings
 import random
 import string
+import re
 
 name = "Johnny Pneumonic"
 email = "johnny@pneumonic.org"
@@ -115,7 +116,6 @@ def count_duplicates_string(s):
         if(count > 1 and s[i] != '0'):
             print(s[i]," - ",count);
 
-        
 
 def parse_name_and_email(f):
     # Format of parse.txt:
@@ -127,7 +127,20 @@ def parse_name_and_email(f):
 
     for name in names:
         surname, firstname, _location, _timeframe, email = name.split("/")
-        
+
+def parse_fail2ban_log(f):
+
+    ip_pattern = re.compile(r'(\d{1,3}\.\d{1,3}\.\d{1.3})')
+
+    with open(f) as log_file:
+        log_lines = log_file.readlines()
+
+    for line in log_lines:
+        dt, lt, action = re.split('[ ]{2,}', line)
+        print(action)
+        a_lines = re.search(r'(Ban)', action)
+        print(ip_pattern.search(a_lines)[0])
+
 pwd = mk_passwd(99)
 
 mk_first_last(name)
@@ -141,3 +154,5 @@ parse_name_and_email('./parse.txt')
 
 count_duplicates_string(pwd)
 organize_chars(pwd)
+
+parse_fail2ban_log('/var/log/fail2ban.log.1')
