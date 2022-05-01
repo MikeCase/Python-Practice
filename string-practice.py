@@ -92,12 +92,12 @@ def parse_name_and_email(f):
     # <SURNAME>/<FIRSTNAME>/<LOCATION>/<TIMEFRAME>/<EMAILADDRESS>
     # Simple right?..
 
-    
+
     with open(f) as nl:
         names = nl.readlines()
 
     for name in names:
-        surname, firstname, _island, _timeframe, email = name.split("/")
+        surname, firstname, _location, _timeframe, email = name.split("/")
         
     
 
