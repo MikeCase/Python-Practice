@@ -36,7 +36,7 @@ def mk_passwd(cmplx):
     if pwd_complexity == 1:
         for i in range(4):
             gen_pwd += random.choice(string.ascii_lowercase)
-            
+
     if pwd_complexity == 2:
         for i in range(10):
             gen_pwd += random.choice(string.ascii_letters)
@@ -50,9 +50,9 @@ def mk_passwd(cmplx):
         for i in range(32):
             all_chars = string.ascii_letters+string.digits+string.punctuation
             gen_pwd += random.choice(all_chars)
-    
-    # Return the generated password 
-    # so's I can use it in the organize_chars() function. 
+
+    # Return the generated password
+    # so's I can use it in the organize_chars() function.
     return gen_pwd
 
 
@@ -66,7 +66,7 @@ def organize_chars(random_txt):
     print(f'Given string: {random_txt}')
     # Loop through characters in string
     # If character is found in string.caracter_class
-    # Add to appropriate list. 
+    # Add to appropriate list.
     for c in random_txt:
         if c in string.ascii_lowercase:
             lower_case += c
@@ -87,18 +87,18 @@ def organize_chars(random_txt):
 
 def count_duplicates_string(s):
     """
-    Count the duplicate characters in a string. 
+    Count the duplicate characters in a string.
 
     @param: s = String you want to count the duplicates in
-    
+
     count_duplicates_string(character_string) -> [char, int]
     """
 
     print("Duplicate characters in a given string: ");
     print(f'Given string: {s}')
 
-    # Found on the interwebs.. 
-    # Going to try to understand and break it down. 
+    # Found on the interwebs..
+    # Going to try to understand and break it down.
 
     # Go through the length of the string
     for i in range(0, len(s)):
@@ -108,11 +108,11 @@ def count_duplicates_string(s):
         # increment i + 1, so j=i+1
         for j in range(i+1, len(s)):
             # Check to see if the current character is equal to the next character
-            # Also 
+            # Also
             if(s[i] == s[j] and s[i] != ' '):
                 count = count + 1;
                 s = s[:j] + '0' + s[j+1:];
-        
+
         if(count > 1 and s[i] != '0'):
             print(s[i]," - ",count);
 
@@ -132,14 +132,19 @@ def parse_fail2ban_log(f):
 
     ip_pattern = re.compile(r'(\d{1,3}\.\d{1,3}\.\d{1.3})')
 
-    with open(f) as log_file:
-        log_lines = log_file.readlines()
+    try:
+        with open(f) as log_file:
+            log_lines = log_file.readlines()
 
-    for line in log_lines:
-        dt, lt, action = re.split('[ ]{2,}', line)
-        print(action)
-        a_lines = re.search(r'(Ban)', action)
-        print(ip_pattern.search(a_lines)[0])
+        for line in log_lines:
+            dt, lt, action = re.split('[ ]{2,}', line)
+            print(action)
+            a_lines = re.search(r'(Ban)', action)
+            print(ip_pattern.search(a_lines)[0])
+
+    except FileNotFoundError:
+        print(f'{f} not found. Moving on.')
+
 
 pwd = mk_passwd(99)
 
